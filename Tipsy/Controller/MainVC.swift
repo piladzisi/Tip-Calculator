@@ -18,10 +18,11 @@ class MainVC: UIViewController {
     @IBOutlet weak var twentyButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
     
-    var tip = 0.10
+    var tip = 10.0
     var isOn = false
     var numberOfPeople = 2.0
-    var billAmount = "0.0"
+    var billAmount = 0.0
+    var amountPerPerson = 0.0
     
     override func viewDidLoad() {
         activateButton(bool: true, button: tenButton)
@@ -39,8 +40,8 @@ class MainVC: UIViewController {
         
         let title = sender.currentTitle ?? "Error"
         let titleMinusSign = String(title.dropLast())
-        let titleAsNumber = Double(titleMinusSign) ?? 0.0
-        tip = titleAsNumber/100
+        tip = Double(titleMinusSign) ?? 0.0
+        
         
     }
     
@@ -65,15 +66,24 @@ class MainVC: UIViewController {
     }
     
     @IBAction func billAmountChanged(_ sender: UITextField) {
-        billAmount = sender.text ?? "0.0"
+        if let billAmountString = sender.text {
+            billAmount = Double(billAmountString)!
+        }
       }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(tip)
-        print(numberOfPeople)
-        print(billAmount)
+        amountPerPerson = billAmount*(1+tip/100) / numberOfPeople
+        self.performSegue(withIdentifier: "goToResult", sender: self)
+        
     }
-   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinatonVC = segue.destination as! ResultVC //downcasting
+            destinatonVC.amountPerPerson = amountPerPerson
+            destinatonVC.numberOfPeople = numberOfPeople
+            destinatonVC.tipPercentage = tip
+        }
+    }
   
 }
 
