@@ -208,6 +208,7 @@
                         <outlet property="twentyButton" destination="UtR-dU-EKt" id="OPw-6Z-Jdq"/>
                         <outlet property="zeroButton" destination="XzR-0E-Xf7" id="guK-OF-Gfz"/>
                         <segue destination="Dnf-m2-FPm" kind="presentation" identifier="goToResult" id="Hlm-aU-2z9"/>
+                        <segue destination="Dnf-m2-FPm" kind="presentation" id="07l-t9-XU6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -307,4 +308,7 @@
             <point key="canvasLocation" x="893" y="118"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Hlm-aU-2z9"/>
+    </inferredMetricsTieBreakers>
 </document>
